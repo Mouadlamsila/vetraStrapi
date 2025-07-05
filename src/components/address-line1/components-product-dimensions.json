@@ -1,0 +1,30 @@
+{
+  "collectionName": "components_address_line1_components_product_dimensions",
+  "info": {
+    "displayName": "components_product_dimensions",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "length": {
+      "type": "decimal"
+    },
+    "width": {
+      "type": "decimal"
+    },
+    "height": {
+      "type": "decimal"
+    },
+    "unit": {
+      "type": "enumeration",
+      "enum": [
+        "ft",
+        "in",
+        "m",
+        "cm",
+        "mm"
+      ],
+      "default": "cm"
+    }
+  }
+}

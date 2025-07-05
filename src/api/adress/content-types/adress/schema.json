@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "adresses",
+  "info": {
+    "singularName": "adress",
+    "pluralName": "adresses",
+    "displayName": "Adress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "addressLine1": {
+      "type": "string",
+      "required": false
+    },
+    "addressLine2": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "postalCode": {
+      "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "adress"
+    }
+  }
+}

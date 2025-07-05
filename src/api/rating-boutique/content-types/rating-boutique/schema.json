@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rating_boutiques",
+  "info": {
+    "singularName": "rating-boutique",
+    "pluralName": "rating-boutiques",
+    "displayName": "rating_boutique",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "stars": {
+      "type": "integer",
+      "max": 5,
+      "min": 1,
+      "default": 1
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "rating_boutiques"
+    },
+    "boutique": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::boutique.boutique",
+      "inversedBy": "rating_boutiques"
+    },
+    "opinion": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

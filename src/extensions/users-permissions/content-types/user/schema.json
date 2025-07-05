@@ -1,0 +1,135 @@
+{
+  "kind": "collectionType",
+  "collectionName": "up_users",
+  "info": {
+    "name": "user",
+    "description": "",
+    "singularName": "user",
+    "pluralName": "users",
+    "displayName": "User"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true,
+      "searchable": false
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.role",
+      "inversedBy": "users",
+      "configurable": false
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "boutiques": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::boutique.boutique",
+      "mappedBy": "owner"
+    },
+    "phone": {
+      "type": "biginteger",
+      "unique": false
+    },
+    "adress": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::adress.adress",
+      "inversedBy": "user"
+    },
+    "business_survey": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::business-surveys.business-surveys",
+      "mappedBy": "user"
+    },
+    "carts": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::cart.cart",
+      "mappedBy": "user"
+    },
+    "favorite_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favorite-product.favorite-product",
+      "mappedBy": "user"
+    },
+    "rating_boutiques": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating-boutique.rating-boutique",
+      "mappedBy": "user"
+    },
+    "rating_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating-product.rating-product",
+      "mappedBy": "user"
+    },
+    "checkout_sessions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::checkout-session.checkout-session",
+      "mappedBy": "user"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order.order",
+      "mappedBy": "user"
+    }
+  }
+}

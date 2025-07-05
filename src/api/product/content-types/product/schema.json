@@ -1,0 +1,133 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "prix": {
+      "type": "decimal",
+      "required": true
+    },
+    "comparePrice": {
+      "type": "decimal"
+    },
+    "cost": {
+      "type": "decimal"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "stock": {
+      "type": "integer"
+    },
+    "lowStockAlert": {
+      "type": "integer"
+    },
+    "weight": {
+      "type": "decimal"
+    },
+    "tags": {
+      "type": "string"
+    },
+    "imgsAdditional": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "boutique": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::boutique.boutique",
+      "inversedBy": "products"
+    },
+    "shippingClass": {
+      "type": "enumeration",
+      "enum": [
+        "free",
+        "local_pickup",
+        "heavy",
+        "fragile",
+        "international",
+        "standard",
+        "express"
+      ]
+    },
+    "dimensions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "address-line1.components-product-dimensions"
+    },
+    "order_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-item.order-item",
+      "mappedBy": "product"
+    },
+    "imgMain": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categorie-product.categorie-product"
+    },
+    "cart": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::cart.cart",
+      "mappedBy": "product"
+    },
+    "rating_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating-product.rating-product",
+      "mappedBy": "product"
+    },
+    "favorite_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::favorite-product.favorite-product",
+      "mappedBy": "product"
+    },
+    "checkout_sessions": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::checkout-session.checkout-session",
+      "mappedBy": "products"
+    },
+    "orders": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::order.order",
+      "mappedBy": "products"
+    },
+    "visibility": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

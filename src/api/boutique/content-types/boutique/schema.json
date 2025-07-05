@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "boutiques",
+  "info": {
+    "singularName": "boutique",
+    "pluralName": "boutiques",
+    "displayName": "Boutique",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "nom": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "emplacement": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "banniere": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "boutiques"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "fashion",
+        "electronics",
+        "home",
+        "beauty",
+        "food",
+        "other"
+      ],
+      "default": "other"
+    },
+    "location": {
+      "type": "component",
+      "repeatable": true,
+      "component": "address-line1.components-address-addresses"
+    },
+    "statusBoutique": {
+      "type": "enumeration",
+      "enum": [
+        "active",
+        "pending",
+        "suspended"
+      ],
+      "default": "pending"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "boutique"
+    },
+    "rating_boutiques": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rating-boutique.rating-boutique",
+      "mappedBy": "boutique"
+    }
+  }
+}

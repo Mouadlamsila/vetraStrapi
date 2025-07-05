@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "checkout_sessions",
+  "info": {
+    "singularName": "checkout-session",
+    "pluralName": "checkout-sessions",
+    "displayName": "checkout_sessions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "sessionId": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "status_checkout": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "completed",
+        "failed"
+      ],
+      "default": "pending"
+    },
+    "amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "checkout_sessions"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "checkout_sessions"
+    },
+    "quantities": {
+      "type": "json"
+    },
+    "currency": {
+      "type": "string",
+      "default": "usd"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "mappedBy": "checkoutSession"
+    },
+    "customer": {
+      "type": "json"
+    },
+    "shippingAddress": {
+      "type": "json"
+    }
+  }
+}

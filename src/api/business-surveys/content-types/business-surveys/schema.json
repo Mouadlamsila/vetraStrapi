@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "business_surveis",
+  "info": {
+    "singularName": "business-surveys",
+    "pluralName": "business-surveis",
+    "displayName": "business_surveys",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "business_survey"
+    },
+    "has_previous_store": {
+      "type": "boolean"
+    },
+    "delivery_required": {
+      "type": "boolean"
+    },
+    "has_suppliers": {
+      "type": "boolean"
+    },
+    "daily_time_available": {
+      "type": "string"
+    },
+    "business_duration": {
+      "type": "string"
+    }
+  }
+}

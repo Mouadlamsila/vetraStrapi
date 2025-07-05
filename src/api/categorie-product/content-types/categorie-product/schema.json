@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categorie_products",
+  "info": {
+    "singularName": "categorie-product",
+    "pluralName": "categorie-products",
+    "displayName": "Categorie_Products",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "required": false,
+      "unique": true
+    }
+  }
+}
