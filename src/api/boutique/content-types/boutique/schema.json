@@ -45,18 +45,6 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "boutiques"
     },
-    "category": {
-      "type": "enumeration",
-      "enum": [
-        "fashion",
-        "electronics",
-        "home",
-        "beauty",
-        "food",
-        "other"
-      ],
-      "default": "other"
-    },
     "location": {
       "type": "component",
       "repeatable": true,
@@ -82,6 +70,12 @@
       "relation": "oneToMany",
       "target": "api::rating-boutique.rating-boutique",
       "mappedBy": "boutique"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categorie.categorie",
+      "inversedBy": "boutiques"
     }
   }
 }

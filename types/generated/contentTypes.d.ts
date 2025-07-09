@@ -418,10 +418,10 @@ export interface ApiBoutiqueBoutique extends Struct.CollectionTypeSchema {
   };
   attributes: {
     banniere: Schema.Attribute.Media<'images'>;
-    category: Schema.Attribute.Enumeration<
-      ['fashion', 'electronics', 'home', 'beauty', 'food', 'other']
-    > &
-      Schema.Attribute.DefaultTo<'other'>;
+    category: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::categorie.categorie'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -528,30 +528,30 @@ export interface ApiCartCart extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiCategorieProductCategorieProduct
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'categorie_products';
+export interface ApiCategorieCategorie extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
   info: {
-    description: '';
-    displayName: 'Categorie_Products';
-    pluralName: 'categorie-products';
-    singularName: 'categorie-product';
+    displayName: 'Categories';
+    pluralName: 'categories';
+    singularName: 'categorie';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
+    boutiques: Schema.Attribute.Relation<'oneToMany', 'api::boutique.boutique'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::categorie-product.categorie-product'
+      'api::categorie.categorie'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String & Schema.Attribute.Unique;
-    photo: Schema.Attribute.Media<'images'>;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -762,8 +762,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     boutique: Schema.Attribute.Relation<'manyToOne', 'api::boutique.boutique'>;
     cart: Schema.Attribute.Relation<'oneToOne', 'api::cart.cart'>;
     category: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::categorie-product.categorie-product'
+      'manyToOne',
+      'api::categorie.categorie'
     >;
     checkout_sessions: Schema.Attribute.Relation<
       'manyToMany',
@@ -1453,7 +1453,7 @@ declare module '@strapi/strapi' {
       'api::boutique.boutique': ApiBoutiqueBoutique;
       'api::business-surveys.business-surveys': ApiBusinessSurveysBusinessSurveys;
       'api::cart.cart': ApiCartCart;
-      'api::categorie-product.categorie-product': ApiCategorieProductCategorieProduct;
+      'api::categorie.categorie': ApiCategorieCategorie;
       'api::checkout-session.checkout-session': ApiCheckoutSessionCheckoutSession;
       'api::country.country': ApiCountryCountry;
       'api::favorite-product.favorite-product': ApiFavoriteProductFavoriteProduct;

@@ -90,11 +90,6 @@
         "images"
       ]
     },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::categorie-product.categorie-product"
-    },
     "cart": {
       "type": "relation",
       "relation": "oneToOne",
@@ -128,6 +123,12 @@
     "visibility": {
       "type": "boolean",
       "default": true
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::categorie.categorie",
+      "inversedBy": "products"
     }
   }
 }
